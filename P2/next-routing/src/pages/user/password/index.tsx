@@ -1,4 +1,4 @@
-const UserSettingPage = () => {
+const PasswordUserPage = () => {
   return (
     <div>
       Password User Page
@@ -6,4 +6,4 @@ const UserSettingPage = () => {
   );
 };
 
-export default UserSettingPage;
+export default PasswordUserPage;
