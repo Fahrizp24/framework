@@ -1,25 +1,26 @@
-import { useRouter } from "next/router"; // 
+import { useRouter } from "next/router";
 
-const halamanToko = () => {
-  // const Router = useRouter(); // 
-  // console.log(Router); // 
-
-  const { query } = useRouter(); // 
+const HalamanKategori = () => {
+  const router = useRouter();
+  const { slug } = router.query;
 
   return (
-    <div> {/* */}
-      <h1>Halaman Toko</h1> {/* */}
+    <div>
+      <h1>Halaman Kategori</h1>
+      <p>Daftar Parameter Slug:</p> <br />
 
-      {/* <p>Toko: ${query.slug && query.slug[0]+"-"+ query.slug[1]}</p> menggunakan backtick bukan petik satu */} {/* */}
-
-      <p>
-        Toko: {Array.isArray(query.slug) ? query.slug.join("-") : query.slug} {/* */}
-      </p>
-      <p>
-        Kategori: {Array.isArray(query.slug) ? query.slug[0] : "Semua Kategori"}
-      </p>
+      <ul>
+        {/* Mengecek apakah slug ada dan merupakan sebuah array */}
+        {Array.isArray(slug) ? (
+          slug.map((item, index) => (
+            <li key={index}>Segmen ke-{index + 1}: {item}</li>
+          ))
+        ) : (
+          <li>{slug}</li>
+        )}
+      </ul>
     </div>
   );
 };
 
-export default halamanToko; //
+export default HalamanKategori;
