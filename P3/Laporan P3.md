@@ -85,7 +85,12 @@ Menambahkan proteksi pada halaman produk sehingga hanya dapat diakses jika statu
 
 **Hasil Running:**
 
-https://github.com/user-attachments/assets/94bef9f6-09a3-4666-8d2f-b2208425034c
+
+
+https://github.com/user-attachments/assets/482cab38-4f18-4f44-9891-e6551fe1e5bb
+
+
+
 ---
 
 ## 10. Pertanyaan Evaluasi
