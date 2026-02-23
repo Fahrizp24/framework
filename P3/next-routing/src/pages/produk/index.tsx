@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"; //
 
 
 const produk = () => { // 
-  const [isLogin, setIsLogin] = useState(true); // 
+  const [isLogin, setIsLogin] = useState(false); // 
   const { push } = useRouter(); // 
 
   useEffect(() => { // 
