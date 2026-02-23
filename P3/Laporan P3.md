@@ -1,5 +1,4 @@
 
-https://github.com/user-attachments/assets/4b6b6f21-73c1-4905-b8e0-54dcbe51737b
 # Laporan Praktikum JS4: Link & Navigation pada Next.js Pages Router
 
 **Nama:** Fahri Zanuar Pradian
@@ -22,7 +21,7 @@ Dilakukan pengujian dengan berbagai jumlah segmen URL untuk memastikan array par
 
 **Hasil Pengujian Berbagai Segmen:**
 ![Langkah 3 - Pengujian Catch-All Route 1](assets/3%20–%20Pengujian%20Catch-All%20Route%20.png)
-![Langkah 3 - Pengujian Catch-All Route 2](assets/3%20–%20Pengujian%20Catch-All%20Route%20(2).png)
+
 ## 4. Langkah 4 - Optional Catch-All Route
 File diubah menjadi `[[...slug]].tsx` (kurung siku ganda) agar halaman `/shop` tetap dapat diakses tanpa menghasilkan error 404 meskipun tidak ada parameter URL yang diberikan.
 
@@ -56,7 +55,6 @@ Menambahkan proteksi pada halaman `/produk` menggunakan `useEffect`. Jika status
 
 https://github.com/user-attachments/assets/1fd376ee-fbf4-42f4-97d7-bc92c7c7d5fa
 
-
 ---
 
 ## 9. Tugas Praktikum
@@ -74,16 +72,12 @@ Menerapkan navigasi dari Login ke Produk menggunakan metode imperatif `router.pu
 
 https://github.com/user-attachments/assets/2b0b1614-27a3-4cdb-9d39-4d7ba4c08a14
 
-
-
 ### Tugas 3 (Bonus) - Proteksi Halaman Produk
 Menambahkan proteksi pada halaman produk sehingga hanya dapat diakses jika status login bernilai `true`. Jika tidak, pengguna akan diarahkan kembali ke halaman login.
 
 **Hasil Running:**
 
 https://github.com/user-attachments/assets/94bef9f6-09a3-4666-8d2f-b2208425034c
-
-
 ---
 
 ## 10. Pertanyaan Evaluasi
