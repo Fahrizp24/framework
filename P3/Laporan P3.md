@@ -1,3 +1,5 @@
+
+https://github.com/user-attachments/assets/4b6b6f21-73c1-4905-b8e0-54dcbe51737b
 # Laporan Praktikum JS4: Link & Navigation pada Next.js Pages Router
 
 **Nama:** Fahri Zanuar Pradian
@@ -13,7 +15,7 @@ Server dijalankan menggunakan perintah `npm run dev`  dan diakses melalui `http:
 Pembuatan folder `shop` dan file `[...slug].tsx`  dilakukan untuk menangkap banyak segmen URL secara dinamis Parameter URL diambil menggunakan `useRouter`  dan ditampilkan sebagai string yang digabungkan dengan tanda hubung.
 
 **Hasil Running:**
-![Langkah 2 - Membuat Catch-All Route](assets/2.png)
+![Langkah 2 - Membuat Catch-All Route](assets/2%20–%20Membuat%20Catch-All%20Route.png)
 
 ## 3. Langkah 3 - Pengujian Catch-All Route
 Dilakukan pengujian dengan berbagai jumlah segmen URL untuk memastikan array parameter tertangkap dengan benar oleh `[...slug].tsx`.
@@ -37,19 +39,23 @@ Menambahkan logika validasi pada halaman toko untuk menampilkan kategori utama (
 Pembuatan folder `auth` berisi file `login.tsx` dan `register.tsx`. Navigasi antar halaman dilakukan secara deklaratif menggunakan komponen `Link` dari `next/link`.
 
 **Hasil Navigasi Link:**
-<video src="assets/6 – Membuat Halaman Login & Register.mp4" controls width="100%"></video>
+https://github.com/user-attachments/assets/99914b71-914f-4143-bb98-1c901c2732ba
 
 ## 7. Langkah 7 - Navigasi Imperatif (router.push)
 Implementasi navigasi menggunakan `router.push()` pada tombol login. Metode ini memungkinkan perpindahan halaman secara terprogram setelah aksi tertentu (seperti klik tombol) dilakukan.
 
 **Hasil Navigasi Imperatif:**
-<video src="assets/7 – Navigasi Imperatif (router.push).mp4" controls width="100%"></video>
+
+https://github.com/user-attachments/assets/77376126-01b5-4486-a672-4b04420cf502
+
 
 ## 8. Langkah 8 - Simulasi Redirect (Belum Login)
 Menambahkan proteksi pada halaman `/produk` menggunakan `useEffect`. Jika status login bernilai `false`, pengguna akan secara otomatis diarahkan kembali ke halaman login.
 
 **Hasil Redirect:**
-<video src="assets/8 – Simulasi Redirect (Belum Login).mp4" controls width="100%"></video>
+
+https://github.com/user-attachments/assets/1fd376ee-fbf4-42f4-97d7-bc92c7c7d5fa
+
 
 ---
 
@@ -65,13 +71,19 @@ Membuat file `/category/[...slug].tsx` yang menampilkan seluruh parameter URL da
 Menerapkan navigasi dari Login ke Produk menggunakan metode imperatif `router.push()` serta mempercantik tampilan form login dan register dengan styling CSS.
 
 **Hasil Running:**
-<video src="assets/Tugas%202.mp4" controls width="100%"></video>
+
+https://github.com/user-attachments/assets/2b0b1614-27a3-4cdb-9d39-4d7ba4c08a14
+
+
 
 ### Tugas 3 (Bonus) - Proteksi Halaman Produk
 Menambahkan proteksi pada halaman produk sehingga hanya dapat diakses jika status login bernilai `true`. Jika tidak, pengguna akan diarahkan kembali ke halaman login.
 
 **Hasil Running:**
-<video src="assets/Tugas%203.mp4" controls width="100%"></video
+
+https://github.com/user-attachments/assets/94bef9f6-09a3-4666-8d2f-b2208425034c
+
+
 ---
 
 ## 10. Pertanyaan Evaluasi
