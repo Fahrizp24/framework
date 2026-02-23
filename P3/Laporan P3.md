@@ -14,31 +14,38 @@ Server dijalankan menggunakan perintah `npm run dev`  dan diakses melalui `http:
 Pembuatan folder `shop` dan file `[...slug].tsx`  dilakukan untuk menangkap banyak segmen URL secara dinamis Parameter URL diambil menggunakan `useRouter`  dan ditampilkan sebagai string yang digabungkan dengan tanda hubung.
 
 **Hasil Running:**
+
 ![Langkah 2 - Membuat Catch-All Route](assets/2%20–%20Membuat%20Catch-All%20Route.png)
 
 ## 3. Langkah 3 - Pengujian Catch-All Route
 Dilakukan pengujian dengan berbagai jumlah segmen URL untuk memastikan array parameter tertangkap dengan benar oleh `[...slug].tsx`.
 
 **Hasil Pengujian Berbagai Segmen:**
+
 ![Langkah 3 - Pengujian Catch-All Route 1](assets/3%20–%20Pengujian%20Catch-All%20Route%20.png)
 
 ## 4. Langkah 4 - Optional Catch-All Route
 File diubah menjadi `[[...slug]].tsx` (kurung siku ganda) agar halaman `/shop` tetap dapat diakses tanpa menghasilkan error 404 meskipun tidak ada parameter URL yang diberikan.
 
 **Hasil Running:**
+
 ![Langkah 4 - Optional Catch-All Route](assets/4%20–%20Optional%20Catch-All%20Route%20.png)
 
 ## 5. Langkah 5 - Validasi Parameter
 Menambahkan logika validasi pada halaman toko untuk menampilkan kategori utama (segmen pertama dari slug) atau pesan default jika kategori tidak tersedia.
 
 **Hasil Running:**
+
 ![Langkah 5 - Validasi Parameter](assets/5%20–%20Validasi%20Parameter%20.png)
 
 ## 6. Langkah 6 - Membuat Halaman Login & Register
 Pembuatan folder `auth` berisi file `login.tsx` dan `register.tsx`. Navigasi antar halaman dilakukan secara deklaratif menggunakan komponen `Link` dari `next/link`.
 
 **Hasil Navigasi Link:**
-https://github.com/user-attachments/assets/99914b71-914f-4143-bb98-1c901c2732ba
+
+
+https://github.com/user-attachments/assets/cec136b0-04a3-4d47-8b13-fb2a55d43e96
+
 
 ## 7. Langkah 7 - Navigasi Imperatif (router.push)
 Implementasi navigasi menggunakan `router.push()` pada tombol login. Metode ini memungkinkan perpindahan halaman secara terprogram setelah aksi tertentu (seperti klik tombol) dilakukan.
@@ -63,6 +70,7 @@ https://github.com/user-attachments/assets/1fd376ee-fbf4-42f4-97d7-bc92c7c7d5fa
 Membuat file `/category/[...slug].tsx` yang menampilkan seluruh parameter URL dalam bentuk list terurut.
 
 **Hasil Running:**
+
 ![Tugas 1](assets/Tugas%201.png)
 
 ### Tugas 2 (Wajib) - Navigasi & Styling
