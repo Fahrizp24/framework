@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { retrieveProducts } from "../utils/db/servicefirebase";
 
 type Data = {
   status: boolean;
@@ -6,26 +7,10 @@ type Data = {
   data: any;
 };
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const data = [
-    {
-      id: "1",
-      nama: "Kaos Polos",
-      harga: 10000,
-      ukuran: "L",
-      warna: "merah",
-    },
-    {
-      id: "2",
-      nama: "Kaos Berlengan Panjang",
-      harga: 15000,
-      ukuran: "M",
-      warna: "biru",
-    },
-  ];
-
+  const data = await retrieveProducts("products");
   res.status(200).json({ status: true, status_code: 200, data: data });
 }
