@@ -1,48 +1,49 @@
 import { useEffect, useState } from "react";
-// import { useRouter } from "next/router";
 
 type ProductType = {
   id: string;
   name: string;
   price: number;
   size: string;
+  category: string; // Tugas 2: Tambah field category
 };
 
-const kategori = () => {
-  // const [isLogin, setIsLogin] = useState(false);
-  // const { push } = useRouter();
-  const [products, setProducts] = useState([]);
+const ProdukPage = () => {
+  const [products, setProducts] = useState<ProductType[]>([]);
 
-  // useEffect(() => {
-  //   if (!isLogin) {
-  //     push("/auth/login");
-  //   }
-  // }, []);
-
-  useEffect(() => {
+  const fetchProducts = () => {
     fetch("/api/produk")
       .then((response) => response.json())
       .then((responsedata) => {
-        // console.log("Data produk:", responsedata.data);
         setProducts(responsedata.data);
       })
-      .catch((error) => {
-        console.error("Error fetching produk:", error);
-      });
+      .catch((error) => console.error("Error:", error));
+  };
+
+  useEffect(() => {
+    fetchProducts();
   }, []);
 
   return (
     <div>
       <h1>Daftar Produk</h1>
-      {products.map((products: ProductType) => (
-        <div key={products.id}>
-          <h2>{products.name}</h2>
-          <p>Harga: {products.price}</p>
-          <p>Ukuran: {products.size}</p>
-        </div>
-      ))}
+      {/* Tugas 3: Tombol Refresh Data */}
+      <button onClick={fetchProducts} style={{ marginBottom: '20px' }}>
+        Refresh Data
+      </button>
+
+      <div style={{ display: 'grid', gap: '15px' }}>
+        {products.map((product) => (
+          <div key={product.id} style={{ border: '1px solid #ddd', padding: '10px' }}>
+            <h2>{product.name}</h2>
+            <p>Kategori: {product.category}</p> {/* Tugas 2: Tampilkan category */}
+            <p>Harga: {product.price}</p>
+            <p>Ukuran: {product.size}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default kategori;
+export default ProdukPage;

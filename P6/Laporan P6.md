@@ -1,76 +1,85 @@
-# Laporan Praktikum 5: Custom Document dan Custom Error Page
+# Laporan Praktikum 6: API Routes pada Next.js dan Integrasi Firebase
 
 **Mata Kuliah:** Pemrograman Framework  
 **Mahasiswa:** Fahri Zanuar Pradian  
-**Topik:** Custom Document dan Custom Error Page pada Next.js (Pages Router)
+**Topik:** API Routes pada Next.js dan Integrasi Firebase (Fullstack Next.js)
 
 ---
 
-## 2. Membuat Custom Document
-Langkah ini melibatkan pembuatan file `_document.tsx` (atau `.js`) untuk memodifikasi struktur dasar HTML secara global. Pada tahap ini, tag HTML diatur dengan atribut bahasa Indonesia (`lang="id"`).
+## 1. Langkah 1 - Menjalankan Project
+Pada langkah ini, saya memastikan project Next.js dapat berjalan dengan baik di local environment dengan menjalankan perintah `npm run dev` di terminal.
 
-![2. Membuat Custom Document](assets/2%20–%20Membuat%20Custom%20Document.png)
+![1. Langkah 1 - Menjalankan Project](assets/Langkah 1.png)
 
-## 3. Pengaturan Title per Halaman
-Implementasi pengaturan judul (title) menggunakan komponen `<Head>` dari `next/head`. Hal ini memungkinkan setiap halaman memiliki judul tab browser yang berbeda dan spesifik sesuai dengan kontennya.
+## 2. Langkah 2 - Membuat API Produk
+Membuat file endpoint API baru di `pages/api/produk.ts` yang mengembalikan response JSON berisi data array produk secara statis dengan status code 200.
 
-![3. Pengaturan Title per Halaman](assets/3%20–%20Pengaturan%20Title%20per%20Halaman.png)
+![2. Langkah 2 - Membuat API Produk](assets/Langkah 2.png)
 
-## 4. Membuat Custom Error Page (404)
-Next.js menyediakan mekanisme untuk menangani rute yang tidak ditemukan dengan membuat file `404.tsx` di dalam folder `pages`. Halaman ini akan secara otomatis ditampilkan ketika user mengakses URL yang tidak valid.
+## 3. Langkah 3 - Fetch Data API di Frontend
+Memodifikasi file `pages/produk/index.tsx` dengan menambahkan hooks `useEffect` dan `useState` untuk mengambil (fetch) data dari endpoint `/api/produk` yang baru dibuat, lalu menampilkannya menggunakan fungsi `map`.
 
-![4. Membuat Custom Error Page (404)](assets/4%20-%20Membuat%20Custom%20Error%20Page%20(404).png)
+![3. Langkah 3 - Fetch Data API di Frontend](assets/3%20-%20Fetch%20Data%20API%20di%20Frontend.png)
 
-## 5. Styling Halaman 404
-Halaman error 404 diberikan styling khusus menggunakan CSS Module (`404.module.scss`). Styling ini mengatur elemen agar berada di tengah layar (menggunakan flexbox), ukuran font, serta penyesuaian layout agar lebih responsif.
+*(Catatan: Penomoran jobsheet melompat, tidak ada Langkah 4)*
 
-![5. Styling Halaman 404](assets/5%20-%20Styling%20Halaman%20404.png)
+## 4. Langkah 5 - Setup Firebase
+Melakukan konfigurasi backend dengan membuat project baru di Firebase Console, menonaktifkan Google Analytics, serta mengaktifkan Cloud Firestore. Rules Firestore juga diubah menjadi `allow read, write: if true;` agar dapat diakses secara publik.
 
-## 6. Menampilkan Gambar dari Folder Public
-Praktikum ini menunjukkan cara memanggil aset statis berupa gambar ilustrasi dari folder `public`. Pemanggilan dilakukan secara langsung melalui atribut `src` pada tag `<img>` tanpa harus menggunakan mekanisme `import` JavaScript.
+## 5. Langkah 6 - Install Firebase
+Menginstal SDK Firebase ke dalam project Next.js menggunakan perintah `npm install firebase` di terminal. Setelah itu, membuat file konfigurasi awal di `utils/db/firebase.ts`.
 
-![6. Menampilkan Gambar dari Folder Public](assets/6%20-%20Menampilkan%20Gambar%20dari%20Folder%20Public.png)
+## 6. Langkah 7 - Konfigurasi Environment Variable
+Membuat file `.env.local` di root project untuk menyimpan kredensial Firebase (seperti API Key, Project ID) agar rahasia tidak ikut ter-push ke repository GitHub.
+
+## 7. Langkah 8 - Konfigurasi Firebase
+Menyesuaikan file `firebase.ts` agar mengambil nilai kredensial dari environment variable (`process.env`) yang sudah dibuat sebelumnya di `.env.local`.
+
+## 8. Langkah 9 - Ambil Data dari Firestore
+Membuat file service khusus `utils/db/servicefirebase.ts` yang berisi fungsi asinkron `retrieveProducts` untuk melakukan query dan mengambil koleksi data dari Firestore.
+
+## 9. Langkah 10 - API Mengambil Data Firebase
+Memodifikasi kembali file `pages/api/produk.ts` agar tidak lagi menggunakan data statis, melainkan memanggil fungsi `retrieveProducts` untuk mengirimkan data dinamis dari Firestore ke frontend.
+
+![9. Langkah 10 - API Mengambil Data Firebase](assets/10%20–%20API%20Mengambil%20Data%20Firebase.png)
+![9. Langkah 10 - API Mengambil Data Firebase](assets/10%20–%20API%20Mengambil%20Data%20Firebase%202.png)
 
 ---
 
-## 10. Hasil Tugas Praktikum
+## E. Hasil Tugas Praktikum
 
-### Tugas 1: Konten Halaman 404 (Wajib)
-Menambahkan judul halaman pada tab browser menggunakan `<Head>`, memberikan teks deskripsi singkat yang informatif, serta menampilkan gambar ilustrasi 404.
+### Tugas 1: Tambah 3 Data Produk di Firestore
+Menambahkan 3 dokumen produk baru secara manual melalui panel Firebase Console dan memastikan data tersebut berhasil ditarik dan tampil di halaman web `/produk`.
 
 ![Tugas 1](assets/Tugas%201.png)
 
-### Tugas 2: Custom Layout dan Handling Navbar (Wajib)
-Melakukan kustomisasi warna latar belakang (menjadi ungu) dan font, serta mengimplementasikan *conditional rendering* pada komponen `AppShell` agar Navbar utama **tidak tampil** ketika user berada di halaman 404.
+### Tugas 2: Tambahkan Field Category
+Menambahkan field baru bernama `category` dengan tipe data string pada dokumen Firestore, lalu memodifikasi `type ProductType` dan kode UI di frontend agar kategori tersebut muncul di layar.
 
 ![Tugas 2](assets/Tugas%202.png)
 
-### Tugas 3: Navigasi Kembali ke Home (Pengayaan)
-Menambahkan interaksi berupa tombol "Kembali ke Home" yang dibungkus dengan komponen navigasi `<Link>` dari Next.js untuk memungkinkan user kembali ke halaman utama (root) tanpa melakukan *full page reload*.
+### Tugas 3: Tombol Refresh Data
+Membuat tombol "Refresh Data" di frontend yang memicu pemanggilan ulang fungsi `fetchProducts()` saat diklik, sehingga data terbaru dari database bisa langsung tampil tanpa perlu me-reload seluruh halaman browser.
 
-![Tugas 3](assets/Tugas%203.gif)
+![Tugas 3](assets/Tugas%203.png)
 
 ---
 
 ## F. Pertanyaan Evaluasi
 
-1. **Apa fungsi utama `_document.js`?**
-   Fungsi utamanya adalah untuk memodifikasi struktur dasar dokumen HTML (tag `<html>`, `<head>`, dan `<body>`) yang dikirimkan oleh server ke browser secara global.
-
-2. **Mengapa `<title>` tidak disarankan di `_document.js`?**
-   Karena `_document.js` bersifat statis dan berlaku global untuk seluruh aplikasi. Jika diletakkan di sana, judul tab browser tidak bisa diubah secara dinamis sesuai isi konten masing-masing halaman. Praktik terbaik adalah menggunakan komponen `next/head` di tiap file halaman.
-
-3. **Apa perbedaan halaman biasa dan halaman `404.js`?**
-   Halaman biasa dirouting berdasarkan nama file/folder spesifik yang dibuat oleh developer (misalnya `about.js` untuk `/about`). Sedangkan `404.js` adalah halaman khusus (*special route*) yang secara otomatis dirender oleh Next.js ketika user mencoba mengakses URL yang rutenya tidak terdaftar dalam aplikasi.
-
-4. **Mengapa folder `public` tidak perlu di-import?**
-   Karena Next.js secara otomatis melayani (serve) semua file statis yang diletakkan di dalam folder `public` langsung ke *root URL* (`/`). Oleh karena itu, file seperti gambar bisa langsung dipanggil melalui atribut sumbernya (contoh: `src="/gambar.png"`) tanpa membutuhkan proses *import module*.
+1. **Apa fungsi API Routes pada Next.js?**
+   Fungsinya adalah untuk membangun endpoint API backend (serverless functions) secara langsung di dalam project Next.js tanpa harus membuat server backend terpisah.
+2. **Mengapa .env.local tidak boleh di-push ke repository?**
+   File `.env.local` berisi data kredensial rahasia (seperti Firebase API Key). Jika ter-push ke repository publik, kredensial tersebut dapat disalahgunakan oleh pihak yang tidak bertanggung jawab.
+3. **Apa perbedaan data statis dan data dinamis?**
+   Data statis adalah data yang diketik langsung (hardcoded) ke dalam source code dan sulit diubah. Sedangkan data dinamis adalah data yang disimpan di database (seperti Firestore) yang bisa ditambahkan, diubah, atau dihapus kapan saja tanpa harus mengubah source code aplikasi.
+4. **Mengapa Next.js disebut framework fullstack?**
+   Karena Next.js tidak hanya bisa merender antarmuka pengguna (Frontend/React), tetapi juga memiliki fitur API Routes yang bertindak sebagai server/backend untuk memproses data dan berinteraksi dengan database.
 
 ---
 
 ## G. Kesimpulan
-Next.js menyediakan mekanisme yang mudah dan terstruktur untuk mengelola konfigurasi metadata global maupun penanganan error:
-* **`_document.tsx`** digunakan untuk mengontrol kerangka dasar dokumen HTML aplikasi.
-* **Komponen `<Head>`** memberikan fleksibilitas SEO dan pengaturan informasi meta per halaman.
-* **Halaman 404 Custom** meningkatkan *User Experience* (UX) dengan menyajikan tampilan error yang selaras dengan tema aplikasi saat rute tidak ditemukan.
-* **Folder Public** sangat efisien untuk manajemen aset statis secara langsung.
+1. **Kemudahan Fullstack:** Fitur API Routes di Next.js sangat mempermudah pembuatan endpoint backend langsung di dalam project yang sama, menghilangkan kebutuhan setup server eksternal tambahan.
+2. **Integrasi Firebase:** Firebase Firestore dapat dihubungkan dengan mudah menggunakan SDK Firebase untuk menangani penyimpanan data NoSQL yang dinamis secara real-time.
+3. **Keamanan Data:** Penggunaan file `.env.local` menjadi praktik wajib untuk menyembunyikan API key dan kredensial sensitif lainnya agar tidak bocor.
+4. **Efisiensi State Management:** Penggunaan Hook `useEffect` dan `useState` di frontend digabungkan dengan fungsi fetch memungkinkan pembaruan data yang efisien di sisi klien tanpa perlu reload halaman secara penuh (seperti pada implementasi tombol refresh).
