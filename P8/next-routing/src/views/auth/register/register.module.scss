@@ -1,0 +1,72 @@
+@use "sass:map";
+@use "@/styles/colors.scss" as colors;
+
+.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: map.get(colors.$schema, color-background); // Menggunakan variabel global [cite: 787, 805]
+
+  .card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+
+    h1 {
+      margin-bottom: 1.5rem;
+      color: map.get(colors.$schema, color-text);
+      font-size: 24px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      input {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+        width: 100%;
+
+        &:focus {
+          border-color: map.get(colors.$schema, color-primary);
+        }
+      }
+
+      button {
+        padding: 12px;
+        background-color: map.get(colors.$schema, color-primary);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+
+        &:hover {
+          background-color: darken(#3498db, 10%); // primary color darken
+        }
+      }
+    }
+
+    .login_link {
+      margin-top: 1rem;
+      display: block;
+      font-size: 14px;
+      color: map.get(colors.$schema, color-primary);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
