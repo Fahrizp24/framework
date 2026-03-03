@@ -53,3 +53,4 @@ Telah mengganti metode fetch manual dengan `useSWR` pada page produk dan memperb
 1. **CSR (Client Side Rendering)** adalah metode yang tepat untuk membuat halaman web yang dinamis dan interaktif tanpa harus sering memuat ulang halaman dari server.
 2. Library **SWR** sangat menyederhanakan proses pengelolaan *state* data eksternal (API) pada aplikasi React/Next.js.
 3. Fitur antarmuka seperti **Skeleton Loading** dan pemformatan angka lokal (`toLocaleString`) sangat penting untuk meningkatkan kenyamanan dan pengalaman pengguna (UX).
+4. Tugas tugas telah selesai pada praktikum
