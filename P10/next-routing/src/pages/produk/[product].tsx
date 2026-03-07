@@ -1,20 +1,23 @@
-import fetcher from "@/utils/swr/fetcher";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 import DetailProduk from "@/views/DetailProduk";
+import { ProductType } from "@/types/Product.type";
 
-const HalamanProduk = () => {
-  const { query } = useRouter();
-  const { data, error, isLoading } = useSWR(
-    query.product ? `/api/produk/${query.product}` : null,
-    fetcher
-  );
-
+const HalamanProduk = ({ product }: { product: ProductType }) => {
   return (
     <div>
-      <DetailProduk product={isLoading ? {} : data?.data} />
+      <DetailProduk product={product} />
     </div>
   );
 };
 
 export default HalamanProduk;
+
+export async function getServerSideProps({ params }: { params: { product: string } }) {
+  const res = await fetch(`http://localhost:3000/api/produk/${params.product}`);
+  const response = await res.json();
+  
+  return {
+    props: {
+      product: response.data || null,
+    },
+  };
+}
