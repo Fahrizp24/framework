@@ -6,7 +6,7 @@ const HalamanProdukStatic = (props: { products: ProductType[] }) => {
 
     return (
         <div>
-            <h1>Halaman Produk Static</h1>
+            <h1>Halaman Produk Staticc</h1>
             <TampilanProduk products={products} />
         </div>
     );
