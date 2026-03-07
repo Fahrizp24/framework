@@ -10,7 +10,7 @@ const HalamanProdukStatic = (props: { products: ProductType[] }) => {
             <TampilanProduk products={products} />
         </div>
     );
-};
+};  
 
 export default HalamanProdukStatic;
 
