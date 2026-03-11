@@ -15,7 +15,7 @@ export default function withAuth(
       });
 
       if (!token) {
-        const loginUrl = new URL("/api/auth/signin", req.url); // Redirect ke halaman login bawaan NextAuth
+        const loginUrl = new URL("/", req.url); // Redirect ke halaman login bawaan NextAuth
         return NextResponse.redirect(loginUrl);
       }
     }
