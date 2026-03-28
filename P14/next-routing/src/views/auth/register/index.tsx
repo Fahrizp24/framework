@@ -8,8 +8,11 @@ const TampilanRegister = () => {
   const { push } = useRouter();
   const [error, setError] = useState("");
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoading(true);
+    setError(""); // Reset error setiap kali submit baru
+
     const form = event.currentTarget;
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email") as string;
@@ -24,15 +27,15 @@ const TampilanRegister = () => {
       body: JSON.stringify({ email, fullname, password }),
     });
 
+    const result = await response.json();
+
     if (response.status === 200) {
       form.reset();
       setIsLoading(false);
       push("/auth/login");
     } else {
       setIsLoading(false);
-      setError(
-        response.status === 400 ? "User already exists" : "An error occurred"
-      );
+      setError(result.name || "An error occurred");
     }
   };
 
