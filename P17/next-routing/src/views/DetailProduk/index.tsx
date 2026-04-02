@@ -1,5 +1,7 @@
 import { ProductType } from "@/types/Product.type";
 import styles from "./detailProduk.module.scss"; 
+import Image from "next/image";
+
 
 const DetailProduk = ({ product }: { product: ProductType }) => {
   // PENGAMAN: Jika product masih undefined atau objek kosong (sedang loading fetch API)
@@ -13,7 +15,12 @@ const DetailProduk = ({ product }: { product: ProductType }) => {
       <h1 className={styles.title}>Detail Produk</h1>
       <div className={styles.produkdetail}>
         <div className={styles.produkdetail_image}>
-          <img src={product.image} alt={product.name} />
+          <Image 
+            src={product.image} 
+            alt={product.name} 
+            width={500} 
+            height={500} 
+          />
         </div>
         <div className={styles.produkdetail_info}>
           <h1 className={styles.produkdetail_name}>{product.name}</h1>
