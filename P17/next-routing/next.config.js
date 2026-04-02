@@ -14,6 +14,12 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "assets.adidas.com", // Untuk gambar sepatu adidas dari API
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "www.static-src.com", // Untuk gambar Celana Chinos
         port: "",
         pathname: "/**",
