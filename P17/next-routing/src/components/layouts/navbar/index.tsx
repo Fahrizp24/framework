@@ -1,42 +1,36 @@
+import Script from 'next/script';
 import Image from 'next/image';
 import styles from './navbar.module.scss';
 import { signIn, signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
-  const { data }: any = useSession();
+  const { data: session }: any = useSession();
 
   return (
     <div className={styles.navbar}>
-      <div className={styles.navbar_brand}>MyApp</div>
+      <div className={styles.navbar_brand} id="title"></div>
+      
+      <Script id="title-script" strategy="lazyOnload">
+        {`document.getElementById('title').innerHTML = 'MyApp';`}
+      </Script>
+
       <div className={styles.navbar_right}>
-        {data ? (
-          <>
-            <div className={styles.navbar_user}>
-              Welcome, {data.user?.fullname}
-              {data.user?.image && (
-                <Image
-                  src={data.user.image}
-                  alt={data.user.fullname}
-                  className={styles.navbar_user_image}
-                  width={30}
-                  height={30}
-                />
-              )}
-            </div>
-            <button
-              className={`${styles.navbar_button} ${styles["navbar_button--danger"]}`}
-              onClick={() => signOut()}
-            >
-              Sign Out
-            </button>
-          </>
+        {session ? (
+          <div className={styles.navbar_user}>
+            Welcome, {session.user?.fullname}
+            {session?.user?.image && (
+              <Image
+                width={50}
+                height={50}
+                src={session.user.image}
+                alt={session.user.fullname}
+                className={styles.navbar_user_image}
+              />
+            )}
+            <button onClick={() => signOut()}>Sign Out</button>
+          </div>
         ) : (
-          <button
-            className={`${styles.navbar_button} ${styles["navbar_button--primary"]}`}
-            onClick={() => signIn()}
-          >
-            Sign In
-          </button>
+          <button onClick={() => signIn()}>Sign In</button>
         )}
       </div>
     </div>
