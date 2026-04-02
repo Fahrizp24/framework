@@ -8,4 +8,4 @@ export function mainMiddleware(req: NextRequest) {
 }
 
 // Memanggil wrapper withAuth dan memasukkan "/profile" ke dalam array requireAuth
-export default withAuth(mainMiddleware, ["/profile", "/admin"]);
+export default withAuth(mainMiddleware, ["/profile", "/admin", "/editor"]);

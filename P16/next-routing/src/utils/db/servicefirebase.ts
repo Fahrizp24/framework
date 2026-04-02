@@ -87,7 +87,8 @@ export async function signIn(email: string) {
     return null;
   }
 }
-export async function signInWithGoogle(userData: any, callback: any) {
+
+export async function signInWithOAuth(userData: any, provider: string, callback: any) {
   try {
     const q = query(
       collection(db, "users"),
@@ -105,7 +106,7 @@ export async function signInWithGoogle(userData: any, callback: any) {
       await updateDoc(doc(db, "users", data[0].id), userData);
       callback({
         status: true,
-        message: "User logged in with Google",
+        message: `User logged in with ${provider}`,
         data: userData,
       });
     } else {
@@ -114,14 +115,14 @@ export async function signInWithGoogle(userData: any, callback: any) {
       await addDoc(collection(db, "users"), userData);
       callback({
         status: true,
-        message: "User registered and logged in with Google",
+        message: `User registered and logged in with ${provider}`,
         data: userData,
       });
     }
   } catch (error: any) {
     callback({
       status: false,
-      message: "Failed to register user with Google",
+      message: `Failed to register user with ${provider}`,
     });
   }
 }

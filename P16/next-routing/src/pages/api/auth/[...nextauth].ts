@@ -1,8 +1,9 @@
-import { signIn, signInWithGoogle } from "@/utils/db/servicefirebase";
+import { signIn, signInWithOAuth } from "@/utils/db/servicefirebase";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
@@ -41,6 +42,10 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID || "",
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
+    }),
   ],
   pages: {
     signIn: "/auth/login",
@@ -62,7 +67,27 @@ export const authOptions: NextAuthOptions = {
         };
 
         // Simpan/sinkronisasi ke Firestore
-        await signInWithGoogle(data, (result: any) => {
+        await signInWithOAuth(data, "Google", (result: any) => {
+          if (result.status) {
+            token.fullname = result.data.fullname;
+            token.email = result.data.email;
+            token.image = result.data.image;
+            token.type = result.data.type;
+            token.role = result.data.role; // Role diambil dari DB
+          }
+        });
+      }
+      // Github OAuth
+      if (account?.provider === "github") {
+        const data = {
+          fullname: user.name || "Github User",
+          email: user.email || "", // Cegah undefined jika akun github diset private email
+          image: user.image || "",
+          type: account.provider,
+        };
+
+        // Simpan/sinkronisasi ke Firestore
+        await signInWithOAuth(data, "Github", (result: any) => {
           if (result.status) {
             token.fullname = result.data.fullname;
             token.email = result.data.email;
