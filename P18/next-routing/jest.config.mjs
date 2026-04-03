@@ -6,8 +6,21 @@ const createJestConfig = nextJest({
 })
 
 const config = {
-  coverageProvider: 'v8',
   testEnvironment: 'jsdom',
+  modulePaths: ['<rootDir>/src/'],
+  collectCoverage: true,
+  collectCoverageFrom: [
+    '**/*.{ts,tsx}',
+    '!**/node_modules/**',
+    '!**/.next/**',
+    '!**/coverage/**',
+    '!**/jest.config.mjs',
+    '!**/next.config.mjs',
+    '!**/types/**',
+    '!**/views/**',
+    '!**/pages/api/**',
+    '!**/*.d.ts',
+  ],
 }
 
 export default createJestConfig(config)
