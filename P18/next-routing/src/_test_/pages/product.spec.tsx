@@ -1,0 +1,28 @@
+// src/__test__/pages/product.spec.tsx
+import { render, screen } from "@testing-library/react"
+import TampilanProduk from "@/pages/produk"
+
+jest.mock("next/router", () => ({
+    useRouter() {
+        return {
+            route: "/product",
+            pathname: "",
+            query: {},
+            asPath: "",
+            push: jest.fn(),
+            events: {
+                on: jest.fn(),
+                off: jest.fn(),
+            },
+            isReady: true,
+        };
+    },
+}));
+
+describe("Product Page", () => {
+    it("renders product page correctly", () => {
+        const page = render(<TampilanProduk />)
+        expect(screen.getByText("Daftar Produk").textContent).toBe("Daftar Produk")
+        expect(page).toMatchSnapshot()
+    })
+})

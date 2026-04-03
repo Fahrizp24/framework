@@ -1,26 +1,74 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`About Page renders about page correctly 1`] = `
+exports[`Product Page renders product page correctly 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div>
-        <h1
-          data-testid="title"
+        <div
+          class="produk"
         >
-          About Page
-        </h1>
+          <h1
+            class="produk_title"
+          >
+            Daftar Produk
+          </h1>
+          <div
+            class="produk_content"
+          >
+            <div
+              class="produk_content_skeleton"
+            >
+              <div
+                class="produk_content_skeleton_image"
+              />
+              <div
+                class="produk_content_skeleton_name"
+              />
+              <div
+                class="produk_content_skeleton_category"
+              />
+              <div
+                class="produk_content_skeleton_price"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div>
-      <h1
-        data-testid="title"
+      <div
+        class="produk"
       >
-        About Page
-      </h1>
+        <h1
+          class="produk_title"
+        >
+          Daftar Produk
+        </h1>
+        <div
+          class="produk_content"
+        >
+          <div
+            class="produk_content_skeleton"
+          >
+            <div
+              class="produk_content_skeleton_image"
+            />
+            <div
+              class="produk_content_skeleton_name"
+            />
+            <div
+              class="produk_content_skeleton_category"
+            />
+            <div
+              class="produk_content_skeleton_price"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],
