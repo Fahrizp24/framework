@@ -59,6 +59,26 @@ Menyelesaikan konflik pada fase pengujian (*crash*) di mana properti array seper
 - **Snapshot Test:** Diimplementasikan masif pada file *testing* yang difungsikan mendeteksi pergeseran integritas bentuk HTML komponen (`toMatchSnapshot()`).
 - **`toBe()` & `getByTestId()`:** Keduanya disatukan secara komprehensif *(chaining)* di dalam berkas tes `TampilanProduk.spec.tsx` untuk melakukan pencarian *node header* yang disematkan test-identity `data-testid="title"` dan mencocokkan kemurnian isi konten berupaa ekspektasi string `"Daftar Produk"`.
 
+**Implementasi Kode (`src/_test_/views/TampilanProduk.spec.tsx`):**
+```tsx
+import { render, screen } from "@testing-library/react"
+import TampilanProduk from "@/views/produk"
+
+describe("Tampilan Produk Component", () => {
+  it("renders correctly with empty data", () => {
+    // 1. Snapshot test
+    const { container } = render(<TampilanProduk products={[]} />)
+    expect(container).toMatchSnapshot()
+  })
+
+  it("renders title correctly", () => {
+    render(<TampilanProduk products={[]} />)
+    // 2 & 3. Kombinasi getByTestId dan toBe()
+    expect(screen.getByTestId("title").textContent).toBe("Daftar Produk")
+  })
+})
+```
+
 **3. Membuat coverage minimal 50%**
 Unit *test cases* di-genjot pada sub-direktori *controller* krusial (`src/pages` dan `src/components`). Hasil metrik pelaporan utilitas Jest mendeteksi kalkulasi akumulatif `% Lines` keseluruhan beranjak melampaui rentang stabil **>50%** (khusus folder page statis mendapat rapor hijau nyaris 100%).
 
