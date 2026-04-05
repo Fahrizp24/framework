@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`AppShell Component does not render Navbar when pathname is disabled (e.g. /404) 1`] = `
+<div>
+  <main
+    class="className"
+  >
+    <div>
+      Content
+    </div>
+  </main>
+</div>
+`;
+
+exports[`AppShell Component renders Navbar when pathname is not disabled 1`] = `
+<div>
+  <main
+    class="className"
+  >
+    <div
+      class="navbar"
+    >
+      <div
+        class="navbar_brand"
+        id="title"
+      />
+      <div
+        class="navbar_right"
+      >
+        <button>
+          Sign In
+        </button>
+      </div>
+    </div>
+    <div>
+      Content
+    </div>
+  </main>
+</div>
+`;

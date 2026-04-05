@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Profile Page renders correctly 1`] = `
+<div>
+  <div>
+    <h1>
+      Halaman Profile
+    </h1>
+    <br />
+    <h2>
+      Selamat Datang 
+      John Doe
+    </h2>
+  </div>
+</div>
+`;

@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Produk Detail Page renders correctly 1`] = `
+<div>
+  <div>
+    <h1
+      class="title"
+    >
+      Detail Produk
+    </h1>
+    <div
+      class="produkdetail"
+    >
+      <div
+        class="produkdetail_image"
+      >
+        <img
+          alt="Test"
+          data-nimg="1"
+          decoding="async"
+          height="500"
+          loading="lazy"
+          src="/_next/image?url=%2Ftest.png&w=1080&q=75"
+          srcset="/_next/image?url=%2Ftest.png&w=640&q=75 1x, /_next/image?url=%2Ftest.png&w=1080&q=75 2x"
+          style="color: transparent;"
+          width="500"
+        />
+      </div>
+      <div
+        class="produkdetail_info"
+      >
+        <h1
+          class="produkdetail_name"
+        >
+          Test
+        </h1>
+        <p
+          class="produkdetail_category"
+        >
+          TestCategory
+        </p>
+        <p
+          class="produkdetail_price"
+        >
+          Rp 
+          1.000
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -6,7 +6,7 @@ import Image from "next/image";
 const TampilanProduk = ({ products }: { products: ProductType[] }) => {
   return (
     <div className={styles.produk}>
-      <h1 className={styles.produk_title}>Daftar Produk</h1>
+      <h1 className={styles.produk_title} data-testid="title">Daftar Produk</h1>
       <div className={styles.produk_content}>
         {products.length > 0 ? (
           products.map((product: ProductType) => (

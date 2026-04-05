@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Home Page renders correctly 1`] = `
+<div>
+  <div>
+    <h1>
+      Praktikum Next.js Pages Router
+    </h1>
+     
+    <br />
+    <p>
+      Mahasiswa D4 Teknik Informatika
+    </p>
+  </div>
+</div>
+`;
