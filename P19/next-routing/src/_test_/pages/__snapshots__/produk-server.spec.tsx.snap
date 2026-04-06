@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Produk Server Page renders correctly 1`] = `
+<div>
+  <div>
+    <h1>
+      Halaman Produk Server
+    </h1>
+    <div
+      class="produk"
+    >
+      <h1
+        class="produk_title"
+        data-testid="title"
+      >
+        Daftar Produk
+      </h1>
+      <div
+        class="produk_content"
+      >
+        <div
+          class="produk_content_skeleton"
+        >
+          <div
+            class="produk_content_skeleton_image"
+          />
+          <div
+            class="produk_content_skeleton_name"
+          />
+          <div
+            class="produk_content_skeleton_category"
+          />
+          <div
+            class="produk_content_skeleton_price"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

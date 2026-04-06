@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Navbar Component renders Sign In button when not authenticated 1`] = `
+<div>
+  <div
+    class="navbar"
+  >
+    <div
+      class="navbar_brand"
+      id="title"
+    />
+    <div
+      class="navbar_right"
+    >
+      <button>
+        Sign In
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Navbar Component renders Sign Out button when authenticated 1`] = `
+<div>
+  <div
+    class="navbar"
+  >
+    <div
+      class="navbar_brand"
+      id="title"
+    />
+    <div
+      class="navbar_right"
+    >
+      <div
+        class="navbar_user"
+      >
+        Welcome, 
+        John Doe
+        <img
+          alt="John Doe"
+          class="navbar_user_image"
+          data-nimg="1"
+          decoding="async"
+          height="50"
+          loading="lazy"
+          src="/_next/image?url=%2Favatar.png&w=128&q=75"
+          srcset="/_next/image?url=%2Favatar.png&w=64&q=75 1x, /_next/image?url=%2Favatar.png&w=128&q=75 2x"
+          style="color: transparent;"
+          width="50"
+        />
+        <button>
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

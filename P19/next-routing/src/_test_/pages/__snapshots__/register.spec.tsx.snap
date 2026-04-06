@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Register Page renders correctly 1`] = `
+<div>
+  <div
+    class="register"
+  >
+    <h1
+      class="register_title"
+    >
+      Halaman Register
+    </h1>
+    <div
+      class="register_form"
+    >
+      <form>
+        <div
+          class="register_form_item"
+        >
+          <label
+            class="register_form_item_label"
+            for="email"
+          >
+            Email
+          </label>
+          <input
+            class="register_form_item_input"
+            id="email"
+            name="email"
+            placeholder="Email"
+            type="email"
+          />
+        </div>
+        <div
+          class="register_form_item"
+        >
+          <label
+            class="register_form_item_label"
+            for="Fullname"
+          >
+            Fullname
+          </label>
+          <input
+            class="register_form_item_input"
+            id="Fullname"
+            name="Fullname"
+            placeholder="Fullname"
+            type="text"
+          />
+        </div>
+        <div
+          class="register_form_item"
+        >
+          <label
+            class="register_form_item_label"
+            for="Password"
+          >
+            Password
+          </label>
+          <input
+            class="register_form_item_input"
+            id="Password"
+            name="Password"
+            placeholder="Password"
+            type="password"
+          />
+        </div>
+        <button
+          class="register_form_item_button"
+          type="submit"
+        >
+          Register
+        </button>
+      </form>
+      <br />
+      <p
+        class="register_form_item_text"
+      >
+        Sudah punya akun? 
+        <a
+          href="/auth/login"
+        >
+          Ke Halaman Login
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+`;

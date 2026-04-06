@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Profile Edit Page renders correctly 1`] = `
+<div>
+  <div>
+    Profile Edit Page
+  </div>
+</div>
+`;

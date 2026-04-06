@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Shop Slug Page renders correctly with array slug 1`] = `
+<div>
+  <div>
+    <h1>
+      Halaman Kategori
+    </h1>
+    <p>
+      Daftar Parameter Slug:
+    </p>
+     
+    <br />
+    <ul>
+      <li>
+        Segmen ke-
+        1
+        : 
+        category
+      </li>
+      <li>
+        Segmen ke-
+        2
+        : 
+        item
+      </li>
+    </ul>
+  </div>
+</div>
+`;

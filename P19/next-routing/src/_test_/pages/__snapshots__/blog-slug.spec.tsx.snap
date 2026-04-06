@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Blog Slug Page renders correctly 1`] = `
+<div>
+  <div
+    style="padding: 20px; font-family: sans-serif;"
+  >
+    <h1>
+      Halaman Slug
+    </h1>
+    <p>
+      Slug: 
+      test-slug
+    </p>
+  </div>
+</div>
+`;
