@@ -4,62 +4,57 @@
 **Topik:** Deployment Aplikasi Next.js ke Vercel  
 
 ### Langkah 1: Membuat Repository GitHub
-Membuat repositori baru di GitHub dan menghubungkannya dengan project Next.js di komputer lokal menggunakan perintah Git, kemudian melakukan push *initial deployment*.
+Membuat repositori baru di GitHub dan menghubungkannya dengan project Next.js di komputer lokal menggunakan perintah Git, kemudian melakukan push *initial deployment*. mengganti dari static to server side rendering pada kode yang dilakukan sebelumnya untuk menghindari *error build* akibat penggunaan `getStaticProps` yang mengandalkan API pada saat pembuatan halaman.
 
 ### Langkah 2: Deployment ke Vercel
-Melakukan import repositori dari GitHub ke layanan Vercel untuk memulai proses deployment production secara otomatis.
+Melakukan import repositori dari GitHub ke layanan Vercel untuk memulai proses deployment *production*.
 **Penyertaan Dokumentasi Langkah 2:**
-Proses awal dimulai dengan menyiapkan project untuk deployment:
-- Meninjau dashboard untuk memuat project baru dari repository.
+- Meninjau *dashboard* Vercel untuk memuat project baru dengan meng-*import* repository GitHub.
   ![Config Project Vercel](assets/2%20-%201.png)
-- Melakukan pendefinisian root direktori yang menjadi target sebelum di-*import*.
-  ![Root Directory](assets/2%20-%20.png)
-- Menjalankan *build* dan *deployment* dari *source code* pada halaman deploy.
+- Melakukan penyesuaian pada pengaturan *Build and Output Settings*, termasuk mengatur *Install Command* agar menggunakan `npm install --force`.
+  ![Build and Output Settings](assets/2%20-%20.png)
+- Proses *deployment* awal berhasil dijalankan dan menampilkan halaman `Congratulations!`.
   ![Deployment Process](assets/2%20-%203.png)
-- Memantau log proses pembangunan aplikasi yang sedang berjalan pada Vercel `Deploying`.
-  ![Deployment Log](assets/2%20-%204.png)
-- *Deployment* telah selesai dengan status `Congratulations!`, namun di tahap ini masih belum menyesuaikan API sehingga mungkin timbul sebagian *error* ketika dijalankan.
-  ![Dashboard Congratulations](assets/2%20-%205.png)
+- Memantau halaman *Production Deployment* yang menunjukkan status `Ready` dari proses sebelumnya beserta riwayat sumber *commit* utama.
+  ![Production Deployment Dashboard](assets/2%20-%204.png)
+- Aplikasi berhasil diakses secara publik pada URL awal yang disediakan Vercel.
+  ![Tampilan Awal Aplikasi](assets/2%20-%205.png)
 
-### Langkah 3: Mengatasi Error Build (SSG ke SSR)
-Mengubah strategi rendering dari Static Site Generation (SSG) menjadi Server Side Rendering (SSR) pada halaman `[produk].tsx` dan `server.tsx` agar Vercel tidak gagal melakukan *fetch* data ke *localhost* saat proses build.
+### Langkah 3: Menambahkan Environment Variable
+Menambahkan variabel lingkungan (Environment Variables) agar URL API dapat dibaca secara dinamis dan tidak terpaku pada localhost saat aplikasi berada di Vercel.
 **Penyertaan Dokumentasi Langkah 3:**
-Setelah *deploy*, ditemui ada masalah pada rute dinamis (SSG) karena API belum menyesuaikan host production:
-- Ditemukan adanya *error* akibat SSG yang gagal *fetch* API ke *localhost* saat *build* dilakukan oleh Vercel.
-  ![Error Vercel 1](assets/3%20-%201.png)
-- Terdapat detail *Type Error* pada Vercel logs yang menyatakan gagalnya *fetch* ke rute dinamis karena dependensi *localhost* tidak beroperasi di sisi *server remote*.
-  ![Error Vercel 2](assets/3%20-%202.png)
-- Melakukan perubahan pada kode (penggantian `getStaticProps` menjadi `getServerSideProps`) di komponen `[produk].tsx` untuk mengatur *fetching* pada setiap permintaan.
-  ![Fix Code](assets/3%20-%203.png)
-- Menyimpan pembaruan tersebut pada *commit* berikutnya dan Vercel langsung secara otomatis memicu *rebuild* dengan hasil *Success*.
-  ![Rebuild Success](assets/3%20-%204.png)
+- Membuka halaman *Environment Variables* di pengaturan Vercel. Pada saat awal, belum ada variabel yang ditetapkan.
+  ![Empty Environment Variables](assets/3%20-%201.png)
+- Mengunggah nilai dari file `.env.local` lokal untuk diimpor atau disalin secara manual ke Vercel.
+  ![Import env local](assets/3%20-%202.png)
+- Menambahkan key `NEXT_PUBLIC_API_URL` dengan *value* yang mengarah pada domain *production* aplikasi di Vercel (contoh: `https://product-catalog-webapp-nextjs.vercel.app` tanpa garis miring di akhir).
+  ![Input Environment Variable](assets/3%20-%203.png)
+- Sistem memunculkan notifikasi `Added Environment Variable successfully` yang menyatakan bahwa aplikasi harus di-*redeploy* agar variabel yang baru saja ditambahkan dapat diaktifkan dalam *build* selanjutnya.
+  ![Redeploy Notification](assets/3%20-%204.png)
 
-### Langkah 4: Menambahkan Environment Variable
-Menambahkan variabel `NEXT_PUBLIC_API_URL` ke menu *Environment Variables* di dashboard Vercel agar URL API menjadi dinamis dan menyesuaikan domain *production*. Melakukan *redeploy* agar pengaturan baru terbaca.
+### Langkah 4: Konfigurasi Google OAuth Production
+Menambahkan domain Vercel ke dalam daftar kredensial Google Cloud Console agar fitur autentikasi (*NextAuth*) via Google dapat berjalan pada lingkungan *production*. 
 **Penyertaan Dokumentasi Langkah 4:**
-- Menavigasi ke menu **Settings > Environment Variables** lalu menambahkan key `NEXT_PUBLIC_API_URL` dengan *value* domain Vercel.
-  ![Input Environment Variable](assets/4%20-%201.png)
-- Melakukan proses *redeploy* aplikasi dalam antrean untuk menyelaraskan pengaturan variabel lingkungannya.
-  ![Redeploy Aplikasi](assets/4%20-%202.png)
+- Mendaftarkan URL beranda Vercel pada kolom *Authorized JavaScript origins*.
+  ![Authorized JavaScript origins](assets/4%20-%201.png)
+- Mendaftarkan endpoint panggil balik (*callback*) NextAuth untuk Google pada kolom *Authorized redirect URIs* (yaitu `<url>/api/auth/callback/google`).
+  ![Authorized redirect URIs](assets/4%20-%202.png)
 
-### Langkah 5: Konfigurasi Google OAuth Production
-Menambahkan domain Vercel ke dalam daftar *Authorized JavaScript origins* dan *Authorized redirect URIs* di Google Cloud Console, serta memperbaiki tipe *button* login agar fitur autentikasi Google dapat berjalan sempurna di *production*. 
-
-### Langkah 6: Pengujian Setelah Deployment
-Menguji jalannya aplikasi pada URL Vercel untuk memastikan Server Side Rendering (SSR) berfungsi, database terkoneksi, serta pengujian integrasi login Google.
-**Dokumentasi Pengujian Langkah 6:**
-Berikut adalah uji sistem secara keseluruhan dari URL production:
-- **Mengetes Beranda (*Home*)**: Halaman depan terakses dengan sempurna.
+### Langkah 5: Pengujian Setelah Deployment
+Menguji jalannya aplikasi secara menyeluruh pada URL Vercel untuk memastikan Server Side Rendering (SSR) berfungsi, serta memeriksa kelancaran otorisasi menggunakan otentikasi reguler maupun Google.
+**Dokumentasi Pengujian Langkah 5:**
+Berikut adalah uji sistem secara keseluruhan dari URL *production*:
+- **Mengetes Beranda (*Home*)**: Halaman depan terakses dengan sempurna di domain Vercel.
   ![Uji Home](assets/5%20Uji%20Home.png)
 - **Mengetes *About Page***: Tampilan rute antar komponen berjalan mulus ter-*render*.
   ![Uji About](assets/5%20Uji%20About%20Page.png)
-- **Mengetes *Products***: Daftar produk ter-*fetch* dan termuat sesuai data secara *real-time* berkat implementasi SSR.
+- **Mengetes *Products***: Daftar produk ter-*fetch* dan termuat sesuai data API karena penanganan SSR sudah dapat menggunakan Base URL yang tepat (*environment variable* Vercel).
   ![Uji Produk](assets/5%20Uji%20Produk%20Page.png)
 - **Mengetes Login Kredensial**: Memeriksa *login* menggunakan layanan biasa dengan *email* dan *password* valid.
-  ![Uji Login Biasa](assets/5%20Uji%20Login%20biasa.gif)
-- **Mengetes Login Google Auth**: Integrasi Auth Provider mengarahkan pengguna secara tepat dari dan ke OAuth Consent Screen.
+  ![Uji Login Biasa](assets/5%20Uji%20Login%20biasa%20.gif)
+- **Mengetes Login Google Auth**: Integrasi Auth Provider mengarahkan pengguna secara tepat dari dan ke layar persetujuan Google (*Google Consent Screen*).
   ![Uji Login Google](assets/5%20Uji%20Login%20google.gif)
-- **Mengetes Sesi Profil**: Sesi *login* terotorisasi yang menampilkan informasi ke profil klien *user*.
+- **Mengetes Sesi Profil**: Sesi *login* terotorisasi yang menampilkan informasi pengguna yang berhasil masuk (seperti nama, email, dan foto Google).
   ![Uji Profile](assets/5%20Uji%20Profile.png)
 
 ---
@@ -67,48 +62,48 @@ Berikut adalah uji sistem secara keseluruhan dari URL production:
 ### E. Hasil Tugas Praktikum
 
 **Tugas 1: Deploy project Next.js ke Vercel**
-Project berhasil di-deploy melalui dashboard Vercel dengan mengaitkannya ke GitHub repository.
-![Dashboard Vercel](assets/2%20-%205.png)
+Project berhasil di-deploy melalui dashboard Vercel dengan status `Ready` dari repository GitHub.
+![Dashboard Vercel Status](assets/2%20-%204.png)
 
 **Tugas 2: Pastikan API tidak menggunakan localhost**
-Telah dikonfigurasi menggunakan `process.env.NEXT_PUBLIC_API_URL` pada kode pemanggilan `fetch`, sehingga API memanggil URL Vercel, bukan localhost.
-![Environment Variable API](assets/4%20-%201.png)
+Telah dikonfigurasi menggunakan variabel `NEXT_PUBLIC_API_URL` yang berisi rute URL ke domain Vercel itu sendiri melalui menu Environment Variables.
+![Environment Variable API](assets/3%20-%203.png)
 
 **Tugas 3: Konfigurasikan Google OAuth production**
-Domain Vercel telah didaftarkan pada Google Cloud Console untuk OAuth 2.0 Client ID.
-![Google Login Berhasil](assets/5%20Uji%20Login%20google.gif)
+Domain Vercel dan *callback URI* barunya telah didaftarkan pada Google Cloud Console untuk OAuth 2.0 Web Application Client-ID.
+![Google OAuth URI](assets/4%20-%202.png)
 
 **Tugas 4: Lakukan minimal 1 redeploy**
-Redeploy telah berhasil dijalankan melalui opsi *Deployment -> Redeploy* pada Vercel setelah menyetel Environment Variable.
-![Redeploy API](assets/4%20-%202.png)
+Redeploy telah berhasil dijalankan sebagai reaksi atas perubahan pada penetapan nilai Environment Variable.
+![Redeploy API](assets/3%20-%204.png)
 
 **Tugas 5: Dokumentasi Deployment**
-Berikut adalah bukti deployment project pada URL *production* dengan kapabilitas penuh Next.js seperti optimasi koneksi *real-time*:
+Telah didokumentasikan di atas. Aplikasi telah memiliki kapabilitas untuk mengambil *fetch* produk menggunakan SSR, serta *login* SSO via Google dan Credentials berjalan tanpa ada kebocoran di lingkungan lokal.
 ![Uji Keseluruhan Aplikasi](assets/5%20Uji%20Produk%20Page.png)
-*(Aplikasi yang *deployed* dapat menjalankan fungsi SSR dan Auth Provider dengan mulus)*
 
 ---
 
 ### F. Pertanyaan Evaluasi
 
 **1. Mengapa localhost tidak boleh digunakan di production?**
-Karena localhost merujuk pada mesin lokal tempat kode berjalan. Saat berada di Vercel (production), "localhost" akan mencari database di dalam server Vercel itu sendiri, bukan di komputer *developer*, sehingga akses data akan gagal.
+Karena localhost merujuk pada mesin atau kontainer tempat kode itu berjalan. Saat aplikasi diluncurkan di Vercel (environment production), alamat "localhost" akan mencari database/API yang sama di dalam server internal Vercel itu sendiri, bukan di komputer *developer*. Karena server API berada di luar dan tidak menyatu dengan lingkungan server Vercel, pemanggilan data menjadi gagal.
 
 **2. Mengapa SSG bisa gagal saat build?**
-SSG melakukan proses *fetching* data saat aplikasi sedang di-*build*. Jika di dalam kode masih menggunakan target API "localhost", Vercel tidak akan bisa mendapatkan data tersebut karena server localhost milik *developer* tidak terhubung ke Vercel.
+SSG (*Static Site Generation*) secara prinsip akan memanggil layanan *fetching* data (seperti `getStaticProps`) pada tahapan instalasi/pembuildan aplikasi itu sendiri. Jika di dalam kode API merujuk ke target "localhost", maka saat Vercel melakukan *build*, server Vercel kesulitan melakukan *fetching* karena tidak mendapati berjalannya penyedia layanannya di port lokal tersebut.
 
 **3. Apa perbedaan SSR dan SSG saat deployment?**
-SSG (*Static Site Generation*) memproses dan mengambil data hanya satu kali pada saat tahap *build*. SSR (*Server Side Rendering*) akan mengambil data secara real-time dari API setiap kali ada *request* (saat URL diakses pengguna).
+SSG memproses halaman HTML dan segala pengambilan datanya sebanyak satu kali saat tahap kompilasi (*build time*), lalu menyajikannya dalam bentuk statis yang cepat. Pada SSR (*Server Side Rendering*), perenderan dan *fetching* data dilakukan oleh server secara terpusat dan berulang kali / *real-time* sesuai dengan permintaan klien (*request time*).
 
 **4. Mengapa perlu redeploy setelah menambahkan environment?**
-Environment Variables disuntikkan ke dalam aplikasi pada fase *build*. Agar Vercel mengenali dan memasukkan variabel (seperti URL API) yang baru ditambahkan, aplikasi wajib di-redeploy (dibuild ulang).
+Environment Variables di Next.js (terutama yang diekspos maupun tidak) pada umumnya disuntikkan dan dibaca pada eksekusi tahapan *build*. Sistem file aplikasi yang dihostingkan tidak bisa mem-parsing data baru dari Vercel secara *hot-reload*. Oleh sebab itu, aplikasi wajib *redeploy* (*build* ulang seluruh berkas source code) guna menanam kembali nilainya.
 
 **5. Apa fungsi redirect URI pada OAuth?**
-Fungsinya adalah sebagai titik kembali yang diizinkan (callback). Setelah pengguna berhasil memasukkan kredensialnya di halaman Google, Google akan mengembalikan pengguna beserta data autentikasinya secara aman menuju halaman/alamat yang disetel pada Redirect URI tersebut.
+Fungsinya adalah sebagai titik destinasi (*callback*) rahasia dan aman. Setelah pengguna memvalidasi alamat profil melalui pusat layar halaman otentikasi Google, kredensial tersebut dikirimkan kembali (di-*redirect*) sebagai token otentikasi agar web memverifikasi status *login*. Karena harus diamankan dari penyerang, redirect URI perlu diawasi dengan ketat di konfigurasi cloud console.
 
 ---
 
 ### G. Kesimpulan
-* Deployment aplikasi Next.js membutuhkan penyesuaian strategi *data fetching*; penggunaan SSR (*Server Side Rendering*) lebih direkomendasikan ketimbang SSG apabila sumber data bersifat *real-time* atau API belum bisa diakses secara publik pada masa *build*.
-* Manajemen *Environment Variable* sangat penting untuk menghindari praktik *hardcode* dan membedakan URL API antara tahap pengembangan (lokal) dan tahap *production* (Vercel).
-* Fitur keamanan pihak ketiga seperti Google OAuth mewajibkan integrasi *Authorized Origins* dan *Redirect URIs* yang spesifik untuk menjamin keamanan akses hanya dari domain yang didaftarkan.
+* Konfigurasi dasar untuk memindah environment lokal ke public seperti Vercel mutlak memikirkan alur pergantian basis Base URL API.
+* Modifikasi fungsi *fetching* mungkin seringkali diperlukan karena keterbatasan kompilasi Vercel (pengubahan SSG ke SSR atau perlakuan *fallback*) agar tak gagal pada masa *build*.
+* Manajemen *Environment Variable* amat diperlukan agar mencegah penyimpanan token sensitif atau pergantian domain API secara langsung (*hardcord*) di dalam *source code*.
+* Integrasi *OAuth Provider* untuk lingkungan riil membutuhkan pembaharuan terhadap parameter keamanan, termasuk meregistrasikan URI domain Vercel agar dapat diotoritaskan oleh sistem server Google.
